@@ -14,5 +14,3 @@ void mostrar(int num);
 void preencherFuncionario(Funcionario* funcionario, char* informacoes);
 
 void mostrar_funcionario(Funcionario funcionario);
-
-void push_front(Lista *lista, Funcionario modelo);

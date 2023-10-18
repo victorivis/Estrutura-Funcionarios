@@ -42,9 +42,29 @@ void mostrar_lista(Lista* lista){
   }
 }
 
-void push_front(Lista *lista, Funcionario modelo) {
+/*
+void push_front_funcionario(Lista *lista, Funcionario modelo) {
   Lista *novo = malloc(sizeof(Lista));
   novo->funcionario = modelo;
   novo->proximo = lista;
   lista = novo;
+}
+*/
+
+Lista* push_front(Lista *lista, char *ficha) {
+  Lista* novo = (Lista *) malloc(sizeof(Lista));
+  preencherFuncionario(&(novo->funcionario), ficha);
+  //mostrar_funcionario(novo->funcionario);
+  
+  //printf("\n sizeof(Lista) = %d\n", (int) sizeof(Lista));
+  
+  //printf("lista = %p\nnovo = %p\n", lista, novo);
+  novo->proximo = lista;
+  
+  //printf("enderco de lista = %p\n", &lista);
+  
+  //printf("antes da troca lista = %p\n", lista);
+  lista = novo;
+  //printf("depois da troca lista = %p\n", lista);
+  //return novo;
 }

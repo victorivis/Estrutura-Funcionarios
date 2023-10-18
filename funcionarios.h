@@ -11,8 +11,8 @@ typedef struct funcionario{
 
 void mostrar(int num);
 
-void preencherFuncionario(Funcionario* funcionario, char* informacoes);
+void preencherFuncionario(Funcionario* funcionario, char* informacoes); //vulgo string_para_funcionario
 
 void mostrar_funcionario(Funcionario funcionario);
 
-void push_front(Lista *lista, Funcionario modelo);
+char* funcionario_para_string(Funcionario modelo);

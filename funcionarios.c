@@ -53,3 +53,26 @@ void mostrar_funcionario(Funcionario funcionario){
   printf("%d, ", funcionario.idade);
   printf("%.2f\n", funcionario.salario);
 }
+
+char* funcionario_para_string(Funcionario modelo){
+	static char saida[100];
+	sprintf(saida, "%s, %s, %d, %f", modelo.nome, modelo.cpf, modelo.idade, modelo.salario);
+	return saida;
+}
+
+/*
+char ** strdvd(char string[], char separador){
+	int inicio=0, fim=0;
+	char **
+	while(string[fim]){
+		if(string[fim] == separador){
+			int tamanho = fim-inicio;
+			if(tamanho){
+				char trecho[tamanho+1];
+				strncpy(trecho, string+inicio, tamanho);
+			}
+		}
+		fim++			
+	}
+}
+*/

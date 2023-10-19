@@ -16,3 +16,7 @@ void preencherFuncionario(Funcionario* funcionario, char* informacoes); //vulgo 
 void mostrar_funcionario(Funcionario funcionario);
 
 char* funcionario_para_string(Funcionario modelo);
+
+void str2shw(char **splitado);
+
+char ** strdvd(char string[], char separador); //retorna uma lista de strings, semelhante a função split() de javascript

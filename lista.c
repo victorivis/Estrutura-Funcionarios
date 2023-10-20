@@ -59,7 +59,6 @@ void exportar_csv(Lista * lista, char *nome_do_arquivo){
         //fprintf(out, "nome, funcao, cpf, nascimento\n"); //Cabecalho do csv
         while(lista){
         	char *palavra = funcionario_para_string(lista->funcionario);
-        	printf("%s\n", palavra);
 			fwrite(palavra, sizeof(char), strlen(palavra), out);
         	fprintf(out, "\n");
         	lista = lista->proximo;
@@ -68,30 +67,55 @@ void exportar_csv(Lista * lista, char *nome_do_arquivo){
     }
 }
 
-/*
-void importar_csv(Funcionario * lista, char * nome_do_arquivo){
+//Nesse você passa o endereco da Lista
+void importar_csv(Lista ** endereco_lista, char * nome_do_arquivo){
     FILE * in;
     if((in = fopen(nome_do_arquivo, "r")) == NULL){
         printf("Arquivo nao foi lido, talvez o nome esteja errado ou ele nao exista\n");
     }
-    //O else eh semelhante a exit em caso de erro, mas nao encerra o programa
     else{
-        int tamanho_string = 100;
-        char linha[100];
-        
-        //Retira a primeira linha que eh o cabecalho
-        char * cabecalho = fgets(linha, tamanho_string, in);
-        
-        while(fgets(linha, tamanho_string, in)){
-            //retirando o enter do final
-            linha[strlen(linha)-1] = '\0';
-            //Adicionando ao primeiro endereco livre
-            addFuncionario(lista, linha);
-        }
-        fclose(in);
-    }
+		Lista * lista = *endereco_lista;
+	    
+		int tamanho_string = 200;
+		char linha[tamanho_string];
+		
+		while (fgets(linha, tamanho_string, in)){
+		    linha[strlen(linha) - 1] = '\0';
+		    char * saida = malloc(sizeof(char) * (strlen(linha)+1) );
+		    strcpy(saida, linha);
+		    
+		    lista = push_front(lista, saida);
+		}
+		fclose(in);
+		
+		*endereco_lista = lista;
+	}
 }
 
+//Nesse outro você coloca Lista p = importar_csv_retorno(p, "nome_do_arquivo")
+Lista * importar_csv_retorno(Lista * lista, char * nome_do_arquivo){
+    FILE * in;
+    if((in = fopen(nome_do_arquivo, "r")) == NULL){
+        printf("Arquivo nao foi lido, talvez o nome esteja errado ou ele nao exista\n");
+        return (Lista *) NULL;
+    }
+    
+	int tamanho_string = 200;
+	char linha[tamanho_string];
+	
+	while (fgets(linha, tamanho_string, in)){
+	    linha[strlen(linha) - 1] = '\0';
+	    char * saida = malloc(sizeof(char) * (strlen(linha)+1) );
+	    strcpy(saida, linha);
+	    
+	    lista = push_front(lista, saida);
+	}
+	fclose(in);
+	
+	return (Lista *) lista;
+}
+
+/*
 void append_csv(Funcionario * lista, char * nome_do_arquivo, int limiteMenor, int limiteMaior){
     FILE * a;
     if((a = fopen(nome_do_arquivo, "a")) == NULL){

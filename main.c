@@ -12,16 +12,23 @@ int main(){
 
 	//Exportando
     Lista *p = NULL;
-    p = push_front(p, "victor, 123, 10, 80.3");
-    p = push_front(p, "joao, 123, 10, 80.3");
-    p = push_front(p, "rafael, 123, 10, 80.3");
+    push_front(&p, "victor, 123, 10, 80.3");
+    push_front(&p, "joao, 123, 10, 80.3");
+    push_front(&p, "rafael, 123, 10, 80.3");
     
-    exportar_csv(p, "saida.txt");
+    Lista *r = NULL;
     
+    //pop_n(&p, 1);
+    mostrar_lista(p);
+    
+    exportar_csv(&p, "saida.txt");
+    
+    /*
     //Importando
     Lista *q = NULL;
     importar_csv(&q, "saida.txt");
     mostrar_lista(q);
+    */
     
     return 0;
 }

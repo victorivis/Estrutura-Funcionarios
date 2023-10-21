@@ -1,11 +1,11 @@
 extern int total;
 
 typedef struct funcionario{
-	char nome[30];
-	char cpf[15];
-	int idade;
-	float salario;
-}Funcionario;
+  char nome[30];
+  char cpf[15];
+  int idade;
+  float salario;
+} Funcionario;
 
 #include "lista.h"
 
@@ -19,4 +19,6 @@ char* funcionario_para_string(Funcionario modelo);
 
 void str2shw(char **splitado);
 
-char ** strdvd(char string[], char separador); //retorna uma lista de strings, semelhante a função split() de javascript
+char ** strdvd(char string[], char separador); //retorna uma lista de strings, semelhante a funcao split() de javascript
+
+//void limpar_funcionario(Funcionario* endereco_funcionario);

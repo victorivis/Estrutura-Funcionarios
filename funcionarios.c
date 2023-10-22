@@ -148,3 +148,9 @@ void mostrar_funcionario(Funcionario funcionario){
   printf("%.2f\n", funcionario.salario);
 }
 
+/*
+void limpar_funcionario(Funcionario* endereco_funcionario){
+	free((*endereco_funcionario).nome);
+	free((*endereco_funcionario).cpf);
+}
+*/

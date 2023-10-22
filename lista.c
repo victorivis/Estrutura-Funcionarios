@@ -203,10 +203,10 @@ void append_csv(Lista ** endereco_lista, char * nome_do_arquivo){
 
 
 void pop_n(Lista **endereco_lista, int destino){
-	int atual=0;
+	int atual=1;
 	Lista *lista = *endereco_lista;
 	if(lista){
-		if(destino){
+		if(destino>1){
 			while(lista && atual!=destino-1){
 				lista = lista->proximo;
 			}
@@ -220,7 +220,7 @@ void pop_n(Lista **endereco_lista, int destino){
 				printf("Remocao impossivel. Funcionario nao existe.\n");
 			}
 		}
-		else{
+		else if(destino==1){
 			//printf("Sucesso\n");
 			Lista *temp = lista;
 			lista = lista->proximo;
@@ -229,4 +229,117 @@ void pop_n(Lista **endereco_lista, int destino){
 			*endereco_lista = lista;
 		}
 	}
+	else{
+		printf("Nao existem funcionarios na lista\n");
+	}
 }
+
+char *strlwr(char string[]){
+	int i=0;
+	char *saida = malloc(sizeof(char) * (strlen(string)+1) );
+	while(string[i]){
+		saida[i] = tolower(string[i]);
+		i++;
+	}
+	saida[i] = '\0';
+	return saida;	
+}
+
+void buscar_nome(Lista *lista, char *nome){
+	int contador=0;
+	char *nome_minusculo = strlwr(nome);
+	while(lista){
+		char *funcionario_minusculo = strlwr(lista->funcionario.nome);
+		if(strstr(funcionario_minusculo, nome_minusculo)){
+			mostrar_funcionario(lista->funcionario);
+			contador++;
+		}
+		free(funcionario_minusculo);
+		lista = lista->proximo;
+	}
+	if(contador == 0){
+		printf("Esse funcionario nao existe\n");
+	}
+	free(nome_minusculo);
+	//free(nome);
+}
+
+int posicao_nome(Lista *lista, char nome[]){
+    char *nome_minusculo = strlwr(nome);
+    int posicao = 1;
+    while(lista){
+        char * funcionario_minusculo = strlwr(lista->funcionario.nome);
+        //printf("contador: %d  funcionario: %s nome: %s\n", posicao, funcionario_minusculo, nome_minusculo);
+        if(strcmp(funcionario_minusculo, nome_minusculo) == 0){
+            free(funcionario_minusculo);
+            return posicao;
+        }
+        free(funcionario_minusculo);
+        lista = lista->proximo;
+        posicao++;
+    }
+        
+    printf("Impossivel remover. Funcionario nao esta na lista\n");
+    free(nome_minusculo);
+    return -1;
+}
+
+/*
+void edit_n(Lista *lista, int posicao){
+	int atual = 1;
+	if(posicao == 1){
+		
+	}
+}
+*/
+
+void editar_por_nome(Lista *lista, char nome[], char ficha_editada[]){
+	int sucesso=0;
+	char *nome_minusculo = strlwr(nome);
+	while(lista){
+		char *funcionario_minusculo = strlwr(lista->funcionario.nome);
+		if(strcmp(funcionario_minusculo, nome_minusculo) == 0){
+			preencherFuncionario(&(lista->funcionario), ficha_editada);
+			sucesso = 1;
+			free(funcionario_minusculo);
+			break;
+		}
+		free(funcionario_minusculo);
+		lista = lista->proximo;
+	}
+	if(sucesso){
+		printf("Editado com sucesso\n");
+	}
+	else{
+		printf("Falha ao editar\n");
+	}
+}
+
+/*
+void deletar_por_nome(Lista **endereco_lista, char nome[]){
+	char *nome_minusculo = strlwr(nome);
+	Lista *lista = *endereco_lista;
+	
+	if(lista){
+		char *funcionario_minusculo = strlwr(lista->funcionario.nome);
+		if(strcmp(nome_minusculo, funcionario_minusculo)){
+		    free(funcionario_minusculo);
+		    
+		    if(lista->proximo){
+		        funcionario_minusculo = strlwr(lista->proximo->funcionario.nome);
+		    }
+		    else{
+		        printf("Funcionario nao existe. Impossivel deletear\n");
+		        return NULL;
+		    }
+		} else{
+		    *endereco_lista = *endereco_lista->proximo;
+		    free(funcionario_minusculo);
+		    free(lista);
+		}
+	}
+	
+	
+	free(nome_minusculo);
+}
+*/
